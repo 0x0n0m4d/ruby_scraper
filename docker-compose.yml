@@ -1,0 +1,29 @@
+version: '3.0'
+
+services:
+  mysql:
+    image: mysql:9.2
+    hostname: mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-user}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-randompassword}
+      MYSQL_USER: ${MYSQL_USER:-mysql_user}
+      MYSQL_PASSWORD: ${MYSQL_USER:-anotherrandompassword}
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1GB'
+
+networks:
+  default:
+    driver: bridge
+    name: scraper
