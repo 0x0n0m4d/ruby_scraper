@@ -1,4 +1,5 @@
 require 'active_record'
+require 'json'
 
 ActiveRecord::Base.establish_connection(
   :adapter  => 'mysql2',
@@ -8,9 +9,21 @@ ActiveRecord::Base.establish_connection(
   :database => 'data'
 )
 
-class User < ActiveRecord::Base
+class Users < ActiveRecord::Base
 end
 
-user = User.where(id: 1)
+User = Struct.new(:id, :name, :createdAt)
 
-printf "%s\n", user.inspect
+def main()
+  users = Array.new()
+  usersData = Users.where(isActive: 1).ids
+
+  usersData.each { 
+    |id, _, name, _, _, createdAt|
+    users.append(User.new(id, name, createdAt))
+  }
+
+  File.open("activeUsers.json", "w") { |f| f.puts users.to_json}
+end
+
+main()
