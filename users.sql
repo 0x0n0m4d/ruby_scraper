@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE users (
     id int,
     username varchar(140),
     name varchar(255),
@@ -7,7 +7,7 @@ CREATE TABLE user (
     createdAt date
 );
 
-INSERT INTO user VALUES (1, "martin", "Martin Jackson", "1password", true, '2024-07-04'),
+INSERT INTO users VALUES (1, "martin", "Martin Jackson", "1password", true, '2024-07-04'),
 (2, "bill", "Bill Cipher", "ilovemyself", true, '2024-08-25'),
 (3, "michael", "Michael Johnes", "lavidaesbella", false, '2024-09-15'),
 (4, "andrew", "Andrew Garfield", "tequieromucho", true, '2024-09-22'),
